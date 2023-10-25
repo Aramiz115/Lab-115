@@ -7,23 +7,23 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Fase de construccion"
 
   test:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "fase de pruebas"
 
   QA:
 
   
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "fase de pruebas QA"
 
   produccion:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "fase de produccion"
