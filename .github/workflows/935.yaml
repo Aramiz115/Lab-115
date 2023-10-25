@@ -17,7 +17,7 @@ jobs:
       - name: Build project with Maven
         run: mvn clean install
       - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@master
+        uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
           project: 'test'
@@ -27,8 +27,3 @@ jobs:
           args: >
             --failOnCVSS 7
             --enableRetired
-      - name: Upload Test results
-        uses: actions/upload-artifact@main
-        with:
-           name: Depcheck report
-           path: ${{github.workspace}}/reports 
