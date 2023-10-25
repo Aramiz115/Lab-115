@@ -7,11 +7,14 @@ on:
 
 jobs:
   depchecktest:
-
+    
     runs-on: ubuntu-latest
     name: depecheck_test
     steps:
-
+      - name: Set up Java 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build project with Maven
@@ -23,7 +26,8 @@ jobs:
           project: 'test'
           path: '.'
           format: 'HTML'
-          out: 'reports' 
+          out: 'reports'
           args: >
             --failOnCVSS 7
             --enableRetired
+            
