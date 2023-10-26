@@ -1,24 +1,25 @@
 name: Horus
 
-  on:
-    push:
-      branches:
-        - main
+on:
+  push:
+    branches:
+      - main
 
-    jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: "Obteniendo ultima versión del código"
-        uses: actions/checkout@v3
+      - name: "Obteniendo última versión del código"
+        uses: actions/checkout@v2
+      
       - name: "Instalación Java"
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: "17"
 
-      - name: Instalar horus 
+      - name: "Instalar Horus"
         run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
 
-      - name: Iniciar Horus
+      - name: "Iniciar Horus"
         run: horusec start -p="./" --return-error true
