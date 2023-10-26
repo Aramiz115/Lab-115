@@ -33,5 +33,6 @@ jobs:
           args: >
             --failOnCVSS 7
             --enableRetired
-          
-          
+      - name: Listar contenido
+        run: ls -la
+

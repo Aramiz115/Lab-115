@@ -11,15 +11,11 @@ jobs:
     steps:
       - name: "Obteniendo última versión del código"
         uses: actions/checkout@v2
-      
-      - name: "Instalación Java"
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: "17"
+
+
 
       - name: "Instalar Horus"
         run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
 
       - name: "Iniciar Horus"
-        run: horusec start -p="./" --return-error true
+        run: horusec start -p="/usr/local/bin/horusec" --return-error true
