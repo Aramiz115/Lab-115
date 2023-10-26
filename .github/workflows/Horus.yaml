@@ -20,7 +20,16 @@ jobs:
       - name: "Iniciar Horus"
         run: horusec start -p="./" --return-error -e="false"
 
-
+      - name: "Dependency Check"
+        uses: dependency-check/Dependency-Check_Action@main
+        env:
+          JAVA_HOME: /opt/jdk
+        id: Depcheck
+        with:
+          project: 'WebGoat'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
 
       - name: "imagen docker"
         run: sudo docker build -t prueba ./
