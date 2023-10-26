@@ -18,4 +18,4 @@ jobs:
         run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
 
       - name: "Iniciar Horus"
-        run: horusec start -p="./usr/local/bin/horusec" --return-error true
+        run: horusec start -p="./home/kali/Lab-DSO" --return-error true
