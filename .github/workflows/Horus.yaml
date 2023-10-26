@@ -20,8 +20,7 @@ jobs:
       - name: "Iniciar Horus"
         run: horusec start -p="./" --return-error -e="false"
 
-      - name: "WebGoat"
-        run: mvn install
+
 
       - name: "imagen docker"
         run: sudo docker build -t prueba ./
