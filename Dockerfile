@@ -1,7 +1,7 @@
 FROM docker.io/eclipse-temurin:17.0.3_7-jre-focal
 LABEL NAME = "WebGoat: Application for examples CI/CD"
 
-RUN sudo mkdir /home/webgoat
+RUN mkdir /home/webgoat
 
 COPY target/webgoat-2023.5-SNAPSHOT.jar /home/webgoat/
 
