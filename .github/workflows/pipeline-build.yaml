@@ -93,7 +93,7 @@ jobs:
           docker ps -a 
 
           docker container stop 935
-          docker conatiner rm 935
+          docker container rm 935
           
 
   horusec:
