@@ -71,7 +71,12 @@ jobs:
           docker build -f Dockerfile . -t webgoat:latest
         
       - name: "run container"
-        run: docker run -d prueba
+        run: |
+          docker run -d prueba
+          docker ps -a
+
+      - name: "Test"
+        run: docker start 
 
   horusec:
     runs-on: ubuntu-latest
