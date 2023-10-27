@@ -1,0 +1,90 @@
+name: GOAT Compile
+
+on: 
+  push:
+      branches:
+       - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obteniendo ultima versio del codigo"
+        uses: actions/checkout@v3
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: "Compilacion"    
+        run: ./mvnw clean install
+
+      - name: "Verificar paquete"
+        run: ls -ltra target
+
+  sca:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: "Obteniendo version"
+        uses: actions/checkout@v2
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: "Compilacion 2"
+        run: ./mvnw clean install
+
+      - name: "Dependency-check"
+        uses: dependency-check/Dependency-Check_Action@main
+        env:
+          JAVA_HOME: /opt/jdk
+        id: Depcheck
+        with:
+          project: 'WebGoat'
+          path: '.'
+          format: 'HTML'
+          out: 'reports' # this is the default, no need to specify unless you wish to override it
+
+      - name: "Resultados del test"
+        uses: actions/upload-artifact@master
+        with:
+          name: "Reporte"
+          path: ${{github.workspace}}/reports
+
+      - name: "Verificar reporte"
+        run: ls -ltra reports
+
+      - name: "Crear imagen de Docker"
+        run: docker build -t prueba ./
+
+      - name: "Verificar imagen"
+        run: docker images 
+
+  horusec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obteniendo ultima versio del codigo"
+        uses: actions/checkout@v3
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      #- name: "Instalar horusec"
+      #  run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
+
+      - name: "Ejecucion de horusec"
+        id: run_horusec
+        uses: fike/horusec-action@main
+        with:
+          arguments: -p="./" --return-error -e="false"
+        #run: horusec start -p="./" --return-error -e="false" 
+
+  
