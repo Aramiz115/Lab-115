@@ -68,9 +68,15 @@ jobs:
           sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
           trivy image prueba
 
-      - name: "iniciar trivy"
-        run: trivy prueba 
-
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
       - name: "Verificar imagen"
         run: docker images
