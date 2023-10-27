@@ -72,11 +72,11 @@ jobs:
         
       - name: "run container"
         run: |
-          docker run -d prueba
+          docker run -d --name 935 prueba
           docker ps -a
 
       - name: "Test"
-        run: docker start 
+        run: docker start f2432b0f1f92
 
   horusec:
     runs-on: ubuntu-latest
