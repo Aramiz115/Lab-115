@@ -73,10 +73,18 @@ jobs:
       - name: "run container"
         run: |
           docker run -p 8080:80 -d --name 935 prueba
-          docker ps -a
+
 
       - name: "Test"
-        run: docker start 935
+        run: | 
+          docker start 935
+          echo "Up server..."
+          sleep 45
+          docker ps -a 
+          curl http://127.0.0.1:8080/WebGoat/login
+          docker container stop 935
+          docker conatiner rm 935
+          
 
   horusec:
     runs-on: ubuntu-latest
