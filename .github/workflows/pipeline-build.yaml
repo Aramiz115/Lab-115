@@ -62,11 +62,7 @@ jobs:
       - name: "Crear imagen de Docker"
         run: docker build -t prueba ./
 
-      - name: "Instalar Trivy"
-        run: |
-          wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
-          sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
-          trivy image prueba
+
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
