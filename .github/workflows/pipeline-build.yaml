@@ -63,8 +63,7 @@ jobs:
         run: docker build -t prueba ./
 
       - name: "instalar trivy"
-        run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
-sudo dpkg -i trivy_0.18.3_Linux-64bit.deb 
+        run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb sudo dpkg -i trivy_0.18.3_Linux-64bit.deb 
 
       - name: "iniciar trivy"
         run: trivy prueba 
