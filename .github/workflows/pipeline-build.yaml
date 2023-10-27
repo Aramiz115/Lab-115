@@ -65,11 +65,13 @@ jobs:
       - name: "Verificar imagen"
         run: docker images
       
-      
 
-      - name: "Exect"
-        run: docker run --name prueba
-
+      - name: "imagen Docker"
+        run: |
+          docker build -f Dockerfile . -t webgoat:latest
+        
+      - name: "run container"
+        run: docker run -d prueba
 
   horusec:
     runs-on: ubuntu-latest
