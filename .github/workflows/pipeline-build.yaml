@@ -63,8 +63,17 @@ jobs:
         run: docker build -t prueba ./
 
       - name: "Verificar imagen"
-        run: docker images 
+        run: docker images
+      
+      - name: "Iniciar imagen"
+        run: |
+          docker build -f Dockerfile . -t webgoat:latest
+          docker run webgoat:latest 
 
+      - name: "Exect"
+        run: docker run --name prueba
+
+        
   horusec:
     runs-on: ubuntu-latest
     steps:
