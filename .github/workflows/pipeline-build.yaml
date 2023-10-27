@@ -72,7 +72,7 @@ jobs:
         
       - name: "run container"
         run: |
-          docker run -p -d 8080:80 --name 935 prueba
+          docker run -p 8080:80 -d --name 935 prueba
           docker ps -a
 
       - name: "Test"
