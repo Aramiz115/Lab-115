@@ -86,7 +86,7 @@ jobs:
         run: |
           docker run -p 8080:80 -d --name 935 prueba
 
-      - name: Ejecutar escaneo Arachni
+      - name: Ejecutar escaneo Arachnii
         run: |
           wget -O arachni.tar.gz https://github.com/Arachni/arachni/releases/download/v1.5.1/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
           tar xvzf arachni.tar.gz
