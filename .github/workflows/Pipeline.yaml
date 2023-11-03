@@ -43,7 +43,7 @@ jobs:
 
       - name: "Aprovicionamiento de terraform"
         run: |
-          terraform -chdir=Lab-115/Terraform/ init
-          terraform -chdir=Lab-115/Terraform/ validate
-          terraform -chdir=Lab-115/Terraform/ plan
-          terraform -chdir=Lab-115/Terraform/ apply
+          terraform -chdir=./Terraform/ init
+          terraform -chdir=./Terraform/ validate
+          terraform -chdir=./Terraform/ plan -out plan
+          terraform -chdir=./Terraform/ apply plan
