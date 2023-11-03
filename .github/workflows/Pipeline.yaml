@@ -50,5 +50,16 @@ jobs:
 
       - name: "Ejecutar ansible"
         run: |
+          
           cd Ansible/
+          var_IP=$(terraform -chdir=Terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
+          sed -i "s/INSTANCIA/$var_IP/" inventario
           sudo ansible-playbook -i inventario server.yaml --become
+           
+
+      
+      - name: "Tirar infra"
+        run: |
+          cd Terraform/
+          terraform plan -destroy -out plan
+          terraform apply plan
