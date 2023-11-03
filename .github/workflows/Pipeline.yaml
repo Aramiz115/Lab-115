@@ -36,14 +36,13 @@ jobs:
 
       - name: "Cargar imagen a ECR"
         run: |
-        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j5p1t7g6
-        docker build -t final .
-        docker tag final:latest public.ecr.aws/j5p1t7g6/final:latest
-        docker push public.ecr.aws/j5p1t7g6/final:latest
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j5p1t7g6
+          docker build -t final .
+          docker tag final:latest public.ecr.aws/j5p1t7g6/final:latest
+          docker push public.ecr.aws/j5p1t7g6/final:latest
 
       - name: "Aprovicionamiento de terraform"
         run: |
-        terraform init
-        terraform validate
-        terraform apply
-        
+          terraform init
+          terraform validate
+          terraform apply
