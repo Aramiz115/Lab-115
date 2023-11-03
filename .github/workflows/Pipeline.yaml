@@ -1,0 +1,49 @@
+name: Prueba final
+
+on: 
+  push:
+      branches:
+       - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obteniendo ultima versio del codigo"
+        uses: actions/checkout@v3
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: "Compilacion"    
+        run: ./mvnw clean install
+
+      - name: "Verificar paquete"
+        run: ls -ltra target
+
+      - name: "Crear imagen de Docker"
+        run: docker build -t prueba ./
+
+      - name: "Configurar credenciales aws"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.SECRET_KEY}}
+        aws-region: ${{ secrets.REGION}}
+
+      - name: "Cargar imagen a ECR"
+        run: |
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j5p1t7g6
+        docker build -t final .
+        docker tag final:latest public.ecr.aws/j5p1t7g6/final:latest
+        docker push public.ecr.aws/j5p1t7g6/final:latest
+
+      - name: "Aprovicionamiento de terraform"
+        run: |
+        terraform init
+        terraform validate
+        terraform apply
+        
