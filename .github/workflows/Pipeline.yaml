@@ -49,12 +49,17 @@ jobs:
           terraform -chdir=./Terraform/ apply plan
 
       - name: "Ejecutar ansible"
+        env:
+          PRIVATE_KEY: ${{ secrets.PEM }}
         run: |
-          
+          sudo apt update
+          sudo apt install -y ansible
           cd Ansible/
+          echo "$PEM" >> $HOME/Prueba.pem
+          sudo chmod 600 $HOME/Prueba.pem
           var_IP=$(terraform -chdir=Terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
           sed -i "s/INSTANCIA/$var_IP/" inventario
-          sudo ansible-playbook -i inventario server.yaml --become
+          sudo ansible-playbook -i inventario server.yaml --become --private-key $HOME/Prueba.pem
            
 
       
