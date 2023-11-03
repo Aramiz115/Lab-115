@@ -54,7 +54,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ansible
-          cd Ansible/
+          cd Ansible
           echo "$PRIVATE_KEY" >> $HOME/Prueba.pem
           sudo chmod 600 $HOME/Prueba.pem
           var_IP=$(terraform -chdir=../Terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
