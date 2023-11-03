@@ -6,7 +6,7 @@ resource "aws_instance" "default" {
   ami           = "ami-0e83be366243f524a" 
   instance_type = "t2.micro"             
   key_name      = "Prueba"
-  security_groups = [aws_security_group.115.id]
+  security_groups = [aws_security_group.taco.id]
   subnet_id = "subnet-0861112d91f2dccaa"
 
     tags = {
@@ -17,7 +17,7 @@ resource "aws_instance" "default" {
            value = aws_instance.default.public_ip
            }
            
-resource "aws_security_group" "115" {
+resource "aws_security_group" "taco" {
   name        = "allow-ssh-http"
   description = "Security Group para SSH y HTTP"
 
