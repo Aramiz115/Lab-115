@@ -60,6 +60,7 @@ jobs:
           var_IP=$(terraform -chdir=Terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
           sed -i "s/INSTANCIA/$var_IP/" inventario
           sudo ansible-playbook -i inventario server.yaml --become --private-key $HOME/Prueba.pem
+        continue-on-error: true 
            
 
       
