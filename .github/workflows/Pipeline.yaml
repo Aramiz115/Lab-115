@@ -43,7 +43,7 @@ jobs:
 
       - name: "Aprovicionamiento de terraform"
         run: |
-          terraform -chdir=/home/kali/Lab-DSO/Terraform/ init
-          terraform -chdir=/home/kali/Lab-DSO/Terraform/ validate
-          terraform -chdir=/home/kali/Lab-DSO/Terraform/ plan
-          terraform -chdir=/home/kali/Lab-DSO/Terraform/ apply
+          terraform -chdir=Lab-115/Terraform/ init
+          terraform -chdir=Lab-115/Terraform/ validate
+          terraform -chdir=Lab-115/Terraform/ plan
+          terraform -chdir=Lab-115/Terraform/ apply
