@@ -47,3 +47,8 @@ jobs:
           terraform -chdir=./Terraform/ validate
           terraform -chdir=./Terraform/ plan -out plan
           terraform -chdir=./Terraform/ apply plan
+
+      - name: "Ejecutar ansible"
+        run: |
+          cd Ansible/
+          sudo ansible-playbook -i inventario server.yaml --become
