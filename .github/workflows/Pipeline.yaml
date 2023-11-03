@@ -50,7 +50,7 @@ jobs:
 
       - name: "Ejecutar ansible"
         env:
-          PRIVATE_KEY: ${{ secrets.PEM }}
+          PRIVATE_KEY: ${{ secrets.PEM}}
         run: |
           sudo apt update
           sudo apt install -y ansible
@@ -62,9 +62,17 @@ jobs:
           export ANSIBLE_HOST_KEY_CHECKING=False
           sudo ansible-playbook -i inventario server.yaml --become --private-key $HOME/Prueba.pem
         continue-on-error: true  
-           
-
-      
+     
+     - name: "Descargar arachni"
+       run: |
+         wget https://github.com/Arachni/arachni/releases/download/v1.6.1.3/arachni-1.6.1.3-0.6.1.1-linux-x86_64.tar.gz
+         tar -xvf arachni-1.6.1.3-0.6.1.1-linux-x86_64.tar.gz
+     
+     - name: "Ejecutar arachni"
+        run: |
+              var_IP=$(terraform -chdir=Terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
+              ./arachni-1.6.1.3-0.6.1.1/bin/arachni --check=* http://$var_IP:8080/WebGoat/login
+     
       - name: "Tirar infra"
         run: |
           cd Terraform/
