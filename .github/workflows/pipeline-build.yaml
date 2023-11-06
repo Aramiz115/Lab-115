@@ -51,10 +51,10 @@ jobs:
           out: 'reporte' # this is the default, no need to specify unless you wish to override it
 
       - name: "Resultados del test"
-        uses: codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v2
         with:
           name: "dependency-check-report.sarif"
-          path: ${{github.workspace}}/reporte
+          path: ./github/workspace/reporte
 
       - name: "Verificar reporte"
         run: ls -ltra reporte
