@@ -78,6 +78,7 @@ jobs:
           sed -i "s/INSTANCIA/$var_IP/" inventario
           export ANSIBLE_HOST_KEY_CHECKING=False
           ansible-playbook -i inventario server.yaml --become --private-key $HOME/Prueba.pem
+          sleep 45
         continue-on-error: true
      
       - name: "Descargar Arachni"
@@ -94,4 +95,4 @@ jobs:
         run: |
           cd Terraform/
           terraform plan -destroy -out plan
-          terraform apply plan
+          terraform apply plan 
