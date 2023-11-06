@@ -54,10 +54,10 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: "dependency-check-report.sarif"
-          path: /github/workspace/reporte/dependency-check-report.sarif
+          path: ${{github.workspace}}/reporte
 
       - name: "Verificar reporte"
-        run: ls -ltra reports
+        run: ls -ltra reporte
 
       - name: "Crear imagen de Docker"
         run: docker build -t prueba ./
