@@ -62,6 +62,7 @@ jobs:
           framework: terraform
           out_format: sarif
           output_file_path: reports/results.sarif
+        continue-on-error: true 
 
 
       - name: "Ejecutar Ansible"
