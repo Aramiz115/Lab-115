@@ -50,11 +50,18 @@ jobs:
           format: 'SARIF'
           out: 'reporte' # this is the default, no need to specify unless you wish to override it
 
-      - name: "Resultados del test"
+      - name: Upload SARIF report
         uses: github/codeql-action/upload-sarif@v2
         with:
-          name: "dependency-check-report.sarif"
-          path: ./github/workspace/reporte
+          sarif_file: ./github/workspace/reporte
+          checkout_path: ${{github.workspace}}/reporte
+    
+
+      #- name: "Resultados del test"
+       # uses: github/codeql-action/upload-sarif@v2
+        #with:
+        #  name: "dependency-check-report.sarif"
+        # path: ./github/workspace/reporte
 
       - name: "Verificar reporte"
         run: ls -ltra reporte
