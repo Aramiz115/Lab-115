@@ -53,14 +53,8 @@ jobs:
       - name: "Resultados del test"
         uses: actions/upload-artifact@master
         with:
-          name: "Reporte"
-          path: ${{github.workspace}}/reports
-
-      - name: Subir
-        uses: github/codeql-action/upload-sarif@v2
-        
-        with:         # Path to SARIF file relative to the root of the repository          
-          sarif_file: ./reports/reporte.sarif
+          name: "dependency-check-report.sarif"
+          path: /github/workspace/reporte/dependency-check-report.sarif
 
       - name: "Verificar reporte"
         run: ls -ltra reports
