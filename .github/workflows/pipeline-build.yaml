@@ -79,7 +79,7 @@ jobs:
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
+          
 #puta
 
       - name: Upload Trivy scan results to GitHub Security tab
