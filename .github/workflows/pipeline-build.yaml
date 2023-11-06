@@ -58,7 +58,7 @@ jobs:
 
       - name: Subir
         uses: github/codeql-action/upload-sarif@v2
-        permissions: write-all 
+        
         with:         # Path to SARIF file relative to the root of the repository          
           sarif_file: ./reports/reporte.sarif
 
