@@ -58,8 +58,10 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: example/examplea
-          framework: terraform 
+          directory: ./Terraform
+          framework: terraform
+          out_format: sarif
+          output_file_path: reports/results.sarif
 
 
       - name: "Ejecutar Ansible"
