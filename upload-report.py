@@ -1,7 +1,7 @@
 import requests
 import json
 import argparse
-from decouple import Config, Csv
+from decouple import Config
 
 config = Config()
 config.read('.env')
