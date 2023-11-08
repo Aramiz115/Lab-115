@@ -4,7 +4,7 @@ import argparse
 from decouple import Config
 
 config = Config()
-config.read('.env')
+config.read('Token.env')
 # Carga las variables de entorno desde el archivo .env
 
 
