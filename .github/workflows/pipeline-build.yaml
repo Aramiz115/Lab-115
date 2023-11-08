@@ -44,6 +44,7 @@ jobs:
       - name: Actualizar piton
         run: |
               pip3 install requests
+              pip3 install python-decouple
 
 
       - name: "Compilacion 2"
