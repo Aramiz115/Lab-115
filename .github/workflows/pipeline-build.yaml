@@ -62,6 +62,8 @@ jobs:
           out: 'reporte' # this is the default, no need to specify unless you wish to override it
 
       - name: Reflect Dojo Dependency check
+        env:
+          Token: ${{ secret.TOKEN_DOJO }}
         run: python3 upload-report.py -f ${{github.workspace}}/reporte/dependency-check-report.xml -t "Dependency Check Scan"
 
      # - name: Upload SARIF report
@@ -94,7 +96,9 @@ jobs:
           format: 'json'
           output: 'trivy-results.json'
 
-      - name: Reflect Dojo trivy
+      - name: Reflect Dojo trivy 
+        env:
+          Token: ${{ secret.TOKEN_DOJO }}
         run: python3 upload-report.py -f ./trivy-results.json -t "Trivy Scan"         
 #puta
 
