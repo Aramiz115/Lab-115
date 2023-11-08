@@ -89,7 +89,7 @@ jobs:
           output: 'trivy-results.json'
 
       - name: Reflect Dojo trivy
-        run: python3 upload-report.py -f ./trivy-results.json -t "Dependency Check Scan"          
+        run: python3 upload-report.py -f ./trivy-results.json -t "Trivy Scan"         
 #puta
 
       #- name: Upload Trivy scan results to GitHub Security tab
