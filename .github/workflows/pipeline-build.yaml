@@ -44,8 +44,7 @@ jobs:
       - name: Actualizar piton
         run: |
               pip3 install requests
-              pip3 install json
-              pip3 argparse
+
 
       - name: "Compilacion 2"
         run: ./mvnw clean install
