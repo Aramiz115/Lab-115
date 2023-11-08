@@ -1,14 +1,22 @@
 import requests
 import json
 import argparse
+from decouple import Config, Csv
+
+config = Config()
+config.read('.env')
+# Carga las variables de entorno desde el archivo .env
+
+
+API_TOKEN = config.get('API_TOKEN')
 
 url_api = "http://18.218.244.166:8080/api/v2/{method}"
-api_key = "Token edaf1740e048924e2f817fb6436a803b690c6900"
+
 
 def get_products():
     headers = {
         'accept' : 'application/json',
-        'Authorization' : api_key 
+        'Authorization' : API_TOKEN 
     }
     
     r = requests.get(url_api.format(method='products'), headers = headers, verify = False)
@@ -21,7 +29,7 @@ def create_product():
     headers = {
         'accept' : 'application/json',
         'Content-Type': 'application/json',
-        'Authorization' : api_key 
+        'Authorization' : API_TOKEN 
     }
     
     body = {
@@ -51,7 +59,7 @@ def create_product():
 def upload_report(file_report, type_scan):
     headers = {
         'accept' : 'application/json',
-        'Authorization' : api_key 
+        'Authorization' : API_TOKEN 
     }
     
     reports = {
