@@ -63,7 +63,7 @@ jobs:
 
       - name: Reflect Dojo Dependency check
         env:
-          Token: ${{ secret.TOKEN_DOJO }}
+          Token: ${{ secrets.TOKEN_DOJO }}
         run: python3 upload-report.py -f ${{github.workspace}}/reporte/dependency-check-report.xml -t "Dependency Check Scan"
 
      # - name: Upload SARIF report
@@ -98,7 +98,7 @@ jobs:
 
       - name: Reflect Dojo trivy 
         env:
-          Token: ${{ secret.TOKEN_DOJO }}
+          Token: ${{ secrets.TOKEN_DOJO }}
         run: python3 upload-report.py -f ./trivy-results.json -t "Trivy Scan"         
 #puta
 
