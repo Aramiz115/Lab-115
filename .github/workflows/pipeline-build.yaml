@@ -35,6 +35,11 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17"
+      
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
 
       - name: "Compilacion 2"
         run: ./mvnw clean install
@@ -47,14 +52,17 @@ jobs:
         with:
           project: 'WebGoat'
           path: '.'
-          format: 'SARIF'
+          format: 'XML'
           out: 'reporte' # this is the default, no need to specify unless you wish to override it
 
-      - name: Upload SARIF report
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ${{github.workspace}}/reporte
-          checkout_path: ${{github.workspace}}/reporte
+      - name: Reflect Dojo Dependency check
+        run: python3 upload-report.py -f ${{github.workspace}}/reporte/dependency-check-report.xml -t "Dependency Check Scan"
+
+     # - name: Upload SARIF report
+        #uses: github/codeql-action/upload-sarif@v2
+        #with:
+          #sarif_file: ${{github.workspace}}/reporte
+          #checkout_path: ${{github.workspace}}/reporte
     
 
       #- name: "Resultados del test"d
@@ -77,16 +85,18 @@ jobs:
           scan-type: 'fs'
           security-checks: 'vuln,secret,config'
           ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          
+          format: 'json'
+          output: 'trivy-results.json'
+
+      - name: Reflect Dojo trivy
+        run: python3 upload-report.py -f ./trivy-results.json -t "Dependency Check Scan"          
 #puta
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
-          category: 'code'
+      #- name: Upload Trivy scan results to GitHub Security tab
+        #uses: github/codeql-action/upload-sarif@v2
+        #with:
+          #sarif_file: 'trivy-results.sarif'
+          #category: 'code'
 
 
 
@@ -136,8 +146,8 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      #- name: "Instalar horusec"
-      #  run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
+     #- name: "Instalar horusec"
+     #  run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
 
       - name: "Ejecucion de horusec"
         id: run_horusec
