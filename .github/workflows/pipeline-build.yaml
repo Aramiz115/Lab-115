@@ -41,6 +41,8 @@ jobs:
         with:
           python-version: 3.8
 
+      - name: pip3 install --upgrade pip
+
       - name: "Compilacion 2"
         run: ./mvnw clean install
 
